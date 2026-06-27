@@ -33,6 +33,8 @@ public class CurrentAppUserService {
             throw new InactiveAppUserException();
         }
 
+        // Tenant context is explicitly resolved server-side from the authenticated user's active membership.
+        // We never trust a tenant ID provided by the frontend to prevent tenant spoofing attacks.
         TenantMembership activeMembership = tenantMembershipRepository
                 .findAllByUserIdWithTenant(appUser.getId())
                 .stream()

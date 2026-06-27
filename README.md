@@ -32,6 +32,14 @@ Es ist ein persönliches Showcase-Projekt und bewusst als kompakter modularer Mo
 - Fachliche Daten werden serverseitig tenant-scoped geladen.
 - Das Frontend sendet für tenant-owned Daten keine `tenantId`.
 
+## Entwicklungsprinzipien
+
+- fachliche Logik liegt im Backend, nicht im Frontend
+- Tenant-Isolation wird serverseitig erzwungen
+- Datenbankschema wird über Flyway versioniert
+- Sicherheitsentscheidungen werden bewusst explizit gehalten
+- Kommentare werden sparsam genutzt und erklären vor allem Architektur- oder Sicherheitsentscheidungen
+
 ## Aktueller Funktionsumfang
 
 - Login über Keycloak
@@ -81,8 +89,11 @@ npm start
 
 Das Frontend läuft lokal über den Angular Dev Server. API-, Logout- und OAuth2-Aufrufe werden über den Proxy an das Spring Boot Backend weitergeleitet.
 
-## Tests
+## Qualität und Tests
 
+Im Backend sind die wichtigsten Grundlagen getestet: Tenant-Auflösung, Projektlogik, PKCE-Konfiguration und Tenant-Isolation mit PostgreSQL/Testcontainers. Flyway-Migrationen werden dabei ebenfalls gegen eine echte Testdatenbank validiert.
+
+Im Frontend gibt es erste Vitest-Tests für die Angular-Struktur und Auth-Guards. Die Frontend-Testabdeckung ist bewusst noch klein und wird mit den nächsten Modulen erweitert.
 Backend:
 
 ```powershell

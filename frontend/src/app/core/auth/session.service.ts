@@ -10,6 +10,9 @@ import { CurrentSession } from './session.model';
 export class SessionService {
   private readonly loginUrl =
     '/oauth2/authorization/oauth2-authorization-flow';
+
+  // Angular does not manage, store, or decode JWTs. The browser only carries the session cookie;
+  // OAuth2 tokens stay server-side in the Spring BFF to reduce token exposure in the frontend.
   private sessionRequest?: Observable<CurrentSession | null>;
 
   readonly session = signal<CurrentSession | null>(null);

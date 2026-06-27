@@ -152,6 +152,8 @@ class ProjectTenantIsolationIntegrationTest {
     @TestConfiguration(proxyBeanMethods = false)
     static class PostgresTestConfiguration {
 
+        // Using a real PostgreSQL container ensures that tenant isolation queries and constraints
+        // behave exactly as they will in production, avoiding H2-specific quirks.
         @Bean
         @ServiceConnection
         PostgreSQLContainer postgresContainer() {

@@ -39,6 +39,7 @@ public class ProjectService {
 
     @Transactional(readOnly = true)
     public List<ProjectResponse> list(AuthUser authUser) {
+        // Tenant ID is resolved from the server-side context, never accepted from the frontend request.
         UUID tenantId = currentAppUserService.resolve(authUser).tenantId();
         return projectRepository.findAllByTenant_IdOrderByCreatedAtDesc(tenantId)
                 .stream()
@@ -149,6 +150,8 @@ public class ProjectService {
     }
 
     private Project findForTenant(UUID projectId, UUID tenantId) {
+        // We throw a 404 (Not Found) instead of 403 (Forbidden) for cross-tenant access attempts.
+        // This prevents leaking the existence of other tenants' data (IDOR protection).
         return projectRepository.findByIdAndTenant_Id(projectId, tenantId)
                 .orElseThrow(() -> new ProjectNotFoundException(projectId));
     }

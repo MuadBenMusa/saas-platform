@@ -40,7 +40,10 @@ public class SecurityConfig {
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().denyAll()
                 )
+                // Tokens are intentionally kept server-side (BFF pattern) to prevent XSS extraction.
+                // The frontend never sees the JWTs; it only receives a session cookie.
                 .oauth2Login(oauth2 -> oauth2
+                        // PKCE is explicitly enforced as defense-in-depth to prevent authorization code interception.
                         .authorizationEndpoint(endpoint -> endpoint
                                 .authorizationRequestResolver(pkceAuthorizationRequestResolver)
                         )

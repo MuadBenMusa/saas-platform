@@ -10,6 +10,9 @@ spring:
 
   jpa:
     hibernate:
+      # Flyway strictly manages database schema migrations.
+      # Hibernate only validates that the schema matches the JPA entities,
+      # preventing accidental auto-updates in production.
       ddl-auto: validate
     open-in-view: false
 
