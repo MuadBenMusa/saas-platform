@@ -1,0 +1,16 @@
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { SessionService } from '../../core/auth/session.service';
+import { TopbarComponent } from '../topbar/topbar.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+
+@Component({
+  selector: 'app-shell',
+  standalone: true,
+  imports: [RouterOutlet, TopbarComponent, SidebarComponent],
+  templateUrl: './app-shell.component.html',
+  styleUrl: './app-shell.component.scss'
+})
+export class AppShellComponent {
+  constructor(public readonly sessionService: SessionService) {}
+}

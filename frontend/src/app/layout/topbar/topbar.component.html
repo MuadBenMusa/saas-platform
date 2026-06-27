@@ -1,0 +1,21 @@
+<header class="topbar">
+  <div>
+    <strong>SaaS Platform</strong>
+  </div>
+
+  <div class="right">
+    @if (session) {
+      <span>{{ session.user.name }}</span>
+      <span class="tenant">{{ session.activeTenant.name }}</span>
+      <button
+        type="button"
+        [disabled]="sessionService.loggingOut()"
+        (click)="sessionService.logout()"
+      >
+        {{ sessionService.loggingOut() ? 'Logging out...' : 'Logout' }}
+      </button>
+    } @else {
+      <button type="button" (click)="sessionService.login()">Login</button>
+    }
+  </div>
+</header>

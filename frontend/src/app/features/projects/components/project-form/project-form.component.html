@@ -1,0 +1,60 @@
+<form class="form" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="field">
+    <label for="projectNumber">Project number</label>
+    <input
+      id="projectNumber"
+      type="text"
+      formControlName="projectNumber"
+      autocomplete="off"
+      aria-describedby="projectNumberHelp"
+      [attr.aria-invalid]="form.controls.projectNumber.invalid && form.controls.projectNumber.touched"
+    />
+    <p id="projectNumberHelp" class="help-text">
+      Use a short tenant-scoped identifier, for example PRJ-001.
+    </p>
+    @if (form.controls.projectNumber.touched && form.controls.projectNumber.hasError('required')) {
+      <p class="field-error">Project number is required.</p>
+    }
+    @if (form.controls.projectNumber.touched && form.controls.projectNumber.hasError('maxlength')) {
+      <p class="field-error">Project number must be 40 characters or fewer.</p>
+    }
+  </div>
+
+  <div class="field">
+    <label for="name">Name</label>
+    <input
+      id="name"
+      type="text"
+      formControlName="name"
+      [attr.aria-invalid]="form.controls.name.invalid && form.controls.name.touched"
+    />
+    @if (form.controls.name.touched && form.controls.name.hasError('required')) {
+      <p class="field-error">Project name is required.</p>
+    }
+    @if (form.controls.name.touched && form.controls.name.hasError('maxlength')) {
+      <p class="field-error">Project name must be 160 characters or fewer.</p>
+    }
+  </div>
+
+  <div class="field">
+    <label for="description">Description</label>
+    <textarea id="description" rows="3" formControlName="description"></textarea>
+    @if (form.controls.description.touched && form.controls.description.hasError('maxlength')) {
+      <p class="field-error">Description must be 1000 characters or fewer.</p>
+    }
+  </div>
+
+  <div class="actions">
+    <button
+      type="button"
+      class="secondary-action"
+      [disabled]="submitting"
+      (click)="cancel.emit()"
+    >
+      Cancel
+    </button>
+    <button type="submit" class="primary-action" [disabled]="submitting">
+      {{ submitting ? 'Creating...' : 'Create project' }}
+    </button>
+  </div>
+</form>

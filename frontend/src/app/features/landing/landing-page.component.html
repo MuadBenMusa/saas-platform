@@ -1,0 +1,27 @@
+<main class="landing">
+  <nav>
+    <strong>SaaS Platform</strong>
+
+    @if (sessionService.isAuthenticated()) {
+      <a routerLink="/dashboard">Dashboard</a>
+    } @else {
+      <a routerLink="/login">Login</a>
+    }
+  </nav>
+
+  <section>
+    <p class="eyebrow">B2B SaaS foundation</p>
+    <h1>One secure workspace for your company.</h1>
+    <p>
+      A simple foundation for tenant-owned projects and future business workflows.
+    </p>
+
+    @if (sessionService.loading()) {
+      <span>Checking your session...</span>
+    } @else if (sessionService.isAuthenticated()) {
+      <a class="primary" routerLink="/dashboard">Open dashboard</a>
+    } @else {
+      <a class="primary" routerLink="/login">Login</a>
+    }
+  </section>
+</main>

@@ -1,0 +1,92 @@
+.form {
+  display: grid;
+  gap: 16px;
+}
+
+label {
+  display: block;
+  color: #0f172a;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  color: #0f172a;
+  outline: none;
+  padding: 10px 12px;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease;
+  width: 100%;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.help-text,
+.field-error {
+  font-size: 0.86rem;
+  margin: 7px 0 0;
+}
+
+.help-text {
+  color: #64748b;
+}
+
+.field-error {
+  color: #b91c1c;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.primary-action,
+.secondary-action {
+  border-radius: 10px;
+  font-weight: 700;
+  min-height: 40px;
+  padding: 0 14px;
+}
+
+.primary-action {
+  background: #0f3b73;
+  border: 1px solid #0f3b73;
+  color: #ffffff;
+}
+
+.primary-action:hover {
+  background: #0b315f;
+}
+
+.secondary-action {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+}
+
+.secondary-action:hover {
+  background: #f8fafc;
+}
+
+@media (max-width: 560px) {
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}

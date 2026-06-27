@@ -1,0 +1,117 @@
+<section class="page">
+  <div class="header">
+    <div>
+      <p class="eyebrow">Tenant workspace</p>
+      <h1>Projects</h1>
+      <p>Create and manage tenant-owned projects.</p>
+    </div>
+
+    <button type="button" class="primary-action" (click)="openCreateDialog()">
+      Create project
+    </button>
+  </div>
+
+  @if (error() && !isCreateDialogOpen() && !projectPendingArchive()) {
+    <div class="alert" role="alert">{{ error() }}</div>
+  }
+
+  @if (loading()) {
+    <div class="state-card loading-card" role="status" aria-live="polite">
+      <span class="spinner" aria-hidden="true"></span>
+      <div>
+        <h2>Loading projects</h2>
+        <p>Fetching tenant-owned work for your active workspace.</p>
+      </div>
+    </div>
+  } @else if (projects().length === 0) {
+    <div class="state-card empty-card">
+      <div class="empty-icon" aria-hidden="true">+</div>
+      <h2>No projects yet</h2>
+      <p>Create your first project to start organizing tenant-owned work.</p>
+      <button type="button" class="primary-action" (click)="openCreateDialog()">
+        Create a project
+      </button>
+    </div>
+  } @else {
+    <app-project-list
+      [projects]="projects()"
+      (archiveProject)="openArchiveDialog($event)"
+    />
+  }
+
+  @if (isCreateDialogOpen()) {
+    <div class="dialog-backdrop">
+      <section
+        class="dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="create-project-title"
+      >
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow">New project</p>
+            <h2 id="create-project-title">Create project</h2>
+            <p>Project ownership will use your active tenant automatically.</p>
+          </div>
+        </div>
+
+        @if (error()) {
+          <div class="alert" role="alert">{{ error() }}</div>
+        }
+
+        <app-project-form
+          [submitting]="creating()"
+          (createProject)="createProject($event)"
+          (cancel)="closeCreateDialog()"
+        />
+      </section>
+    </div>
+  }
+
+  @if (projectPendingArchive(); as project) {
+    <div class="dialog-backdrop">
+      <section
+        class="dialog dialog--narrow"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="archive-project-title"
+      >
+        <div class="dialog-header">
+          <div>
+            <p class="eyebrow">Archive</p>
+            <h2 id="archive-project-title">Archive project?</h2>
+            <p>This project will be hidden from active work but kept for history.</p>
+          </div>
+        </div>
+
+        <div class="archive-summary">
+          <span>{{ project.projectNumber }}</span>
+          <strong>{{ project.name }}</strong>
+        </div>
+
+        @if (error()) {
+          <div class="alert" role="alert">{{ error() }}</div>
+        }
+
+        <div class="dialog-actions">
+          <button
+            type="button"
+            class="secondary-action"
+            [disabled]="archiving()"
+            (click)="closeArchiveDialog()"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="danger-action"
+            [disabled]="archiving()"
+            (click)="confirmArchiveProject()"
+          >
+            {{ archiving() ? 'Archiving...' : 'Archive project' }}
+          </button>
+        </div>
+      </section>
+    </div>
+  }
+</section>

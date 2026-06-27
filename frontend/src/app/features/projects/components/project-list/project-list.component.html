@@ -1,0 +1,82 @@
+<div class="table-card">
+  <table aria-label="Projects">
+    <colgroup>
+      <col class="number-column" />
+      <col class="project-column" />
+      <col class="status-column" />
+      <col class="created-column" />
+      <col class="actions-column" />
+    </colgroup>
+
+    <thead>
+    <tr>
+      <th scope="col">Number</th>
+      <th scope="col">Project</th>
+      <th scope="col">Status</th>
+      <th scope="col">Created</th>
+      <th scope="col" class="actions-heading">
+        <span class="sr-only">Actions</span>
+      </th>
+    </tr>
+    </thead>
+
+    <tbody>
+      @for (project of projects; track project.id) {
+        <tr [class.is-archived]="project.status === 'ARCHIVED'">
+          <td class="number-cell">
+            <span class="project-number">{{ project.projectNumber }}</span>
+          </td>
+          <td class="project-cell">
+            <strong class="project-name">{{ project.name }}</strong>
+            @if (project.description) {
+              <div class="description">{{ project.description }}</div>
+            }
+          </td>
+          <td class="status-cell">
+            <span
+              class="status-badge"
+              [class.status-badge--active]="project.status === 'ACTIVE'"
+              [class.status-badge--archived]="project.status === 'ARCHIVED'"
+            >
+              {{ project.status }}
+            </span>
+          </td>
+          <td class="created-cell">{{ project.createdAt | date: 'short' }}</td>
+          <td class="actions-cell" (click)="$event.stopPropagation()">
+            <div class="row-actions">
+              <button
+                type="button"
+                class="actions-trigger"
+                [attr.aria-label]="'Open actions for ' + project.projectNumber"
+                aria-haspopup="menu"
+                [attr.aria-expanded]="openActionsProjectId() === project.id"
+                (click)="toggleActionsMenu(project, $event)"
+              >
+                <span aria-hidden="true">&#8942;</span>
+              </button>
+
+              @if (openActionsProjectId() === project.id) {
+                <div class="actions-menu" role="menu">
+                  @if (project.status !== 'ARCHIVED') {
+                    <button
+                      type="button"
+                      class="menu-item menu-item--danger"
+                      role="menuitem"
+                      (click)="archiveFromMenu(project, $event)"
+                    >
+                      Archive
+                    </button>
+                  } @else {
+                    <button type="button" class="menu-item" role="menuitem" disabled>
+                      Archived
+                    </button>
+                  }
+                </div>
+              }
+            </div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

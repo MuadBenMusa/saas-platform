@@ -1,0 +1,16 @@
+<main class="login-page">
+  <section class="login-card">
+    <a routerLink="/">← Back to home</a>
+
+    <h1>Sign in</h1>
+    <p>Continue to your company workspace.</p>
+
+    @if (loggedOut()) {
+      <div class="notice">You have been logged out.</div>
+    }
+
+    <button type="button" (click)="sessionService.login()">
+      Login with Keycloak
+    </button>
+  </section>
+</main>

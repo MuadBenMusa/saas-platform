@@ -1,0 +1,65 @@
+.landing {
+  background:
+    radial-gradient(circle at top left, rgba(191, 219, 254, 0.55), transparent 34rem),
+    #f5f9ff;
+  color: #0f172a;
+  min-height: 100vh;
+}
+
+nav {
+  background: rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid #dbeafe;
+  height: 64px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+section {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 120px 24px;
+}
+
+h1 {
+  max-width: 620px;
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  line-height: 1.05;
+  margin: 12px 0 20px;
+}
+
+section > p:not(.eyebrow) {
+  max-width: 580px;
+  color: #475569;
+  font-size: 1.125rem;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  color: #1d4ed8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.primary {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: #0f3b73;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 12px 24px rgba(15, 59, 115, 0.16);
+}
+
+.primary:hover {
+  background: #0b315f;
+}

@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: auth-code-flow
+
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  security:
+    oauth2:
+      client:
+        registration:
+          oauth2-authorization-flow:
+            provider: keycloak
+            client-id: ${KEYCLOAK_CLIENT_ID:oauth2-authorization-flow}
+            client-secret: ${KEYCLOAK_CLIENT_SECRET}
+            scope: openid, profile, roles, email
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
+        provider:
+          keycloak:
+            issuer-uri: ${KEYCLOAK_ISSUER_URI}
+
+app:
+  security:
+    login-success-redirect-uri: ${APP_SECURITY_LOGIN_SUCCESS_REDIRECT_URI}
+    post-logout-redirect-uri: ${APP_SECURITY_POST_LOGOUT_REDIRECT_URI}

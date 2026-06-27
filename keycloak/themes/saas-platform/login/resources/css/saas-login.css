@@ -1,0 +1,392 @@
+/* 
+  SaaS Platform Custom Keycloak Login Theme
+  Robust CSS-only extension to override PatternFly 4, PatternFly 5, and Keycloak v3 themes
+*/
+
+/* --- 1. Base & Background Overrides (KILL THE POLYGON) --- */
+:root {
+  --pf-v5-c-background-image--BackgroundImage: none !important;
+  --pf-v5-c-background-image--BackgroundImage-2x: none !important;
+  --pf-v5-c-background-image--BackgroundImage-sm: none !important;
+  --pf-v5-c-background-image--BackgroundImage-sm-2x: none !important;
+  --pf-v5-c-background-image--BackgroundImage-lg: none !important;
+  --pf-v5-c-background-image--Filter: none !important;
+  
+  --pf-c-background-image--BackgroundImage: none !important;
+  --pf-c-background-image--BackgroundImage-2x: none !important;
+  --pf-c-background-image--Filter: none !important;
+  
+  --kc-login-bg: none !important;
+  --kc-login-bg-image: none !important;
+}
+
+html, 
+body, 
+body.login-pf-page,
+body.login-pf,
+.pf-v5-c-background-image,
+.pf-c-background-image {
+  background-image: none !important;
+  background: radial-gradient(circle at top, rgba(191, 219, 254, 0.55), transparent 32rem), #f5f9ff !important;
+  background-color: #f5f9ff !important;
+  color: #0f172a !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure the wrapper centers the content nicely */
+.login-pf-page,
+.pf-v5-c-login,
+.pf-c-login {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 24px !important;
+  background: transparent !important;
+}
+
+/* Hide old generic Keycloak header background blocks if any */
+.login-pf-page .login-pf-page-header,
+.pf-v5-c-login__header,
+.pf-c-login__header {
+  display: none !important;
+}
+
+/* --- 2. Login Card Container --- */
+.login-pf-page .card-pf,
+.pf-v5-c-login__main,
+.pf-c-login__main,
+#kc-content {
+  background: #ffffff !important;
+  border: 1px solid #dbeafe !important;
+  border-radius: 24px !important;
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.08) !important;
+  max-width: 440px !important;
+  width: 100% !important;
+  padding: 40px 32px !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+/* --- 3. Header & Logo --- */
+.login-pf-header,
+.pf-v5-c-login__main-header,
+.pf-c-login__main-header {
+  margin-bottom: 28px !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+/* Hide default KC header text/logos */
+#kc-header,
+.kc-logo-text {
+  display: none !important; 
+}
+
+/* Add custom logo using pseudo-element on the header wrapper */
+#kc-header-wrapper {
+  color: transparent !important; /* Hide text */
+  display: block !important;
+  height: 52px !important;
+  background: url('../img/logo.svg') no-repeat center !important;
+  background-size: contain !important;
+  margin-bottom: 20px !important;
+  text-indent: -9999px !important; /* Fallback for hiding text */
+}
+
+/* Title text */
+#kc-page-title,
+.pf-v5-c-title,
+.pf-c-title {
+  color: #0f172a !important;
+  font-size: 1.6rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  margin: 0 0 24px 0 !important;
+  text-align: center !important;
+  display: block !important;
+}
+
+/* --- 4. Form & Spacing --- */
+#kc-form,
+.pf-v5-c-form,
+.pf-c-form {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.pf-v5-c-form__group,
+.pf-c-form__group {
+  margin-bottom: 0 !important; /* use flex gap instead */
+}
+
+.pf-v5-c-form__label,
+.pf-c-form__label {
+  padding-bottom: 6px !important;
+  display: block !important;
+}
+
+.pf-v5-c-form__label-text,
+.pf-c-form__label-text {
+  color: #475569 !important;
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+}
+
+/* --- 5. Inputs & Password Toggle --- */
+/* Standard input */
+.pf-v5-c-form-control,
+.pf-c-form-control,
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  background-color: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  color: #0f172a !important;
+  padding: 10px 14px !important;
+  height: 46px !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.pf-v5-c-form-control:hover,
+.pf-c-form-control:hover,
+input[type="text"]:hover,
+input[type="password"]:hover {
+  border-color: #94a3b8 !important;
+}
+
+.pf-v5-c-form-control:focus,
+.pf-c-form-control:focus,
+.pf-v5-c-form-control:focus-within,
+.pf-c-form-control:focus-within,
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: #2563eb !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.24) !important;
+}
+
+/* Password eye button group */
+.pf-v5-c-input-group,
+.pf-c-input-group {
+  display: flex !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  height: 46px !important;
+  padding: 0 !important;
+}
+
+.pf-v5-c-input-group:focus-within,
+.pf-c-input-group:focus-within {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.24) !important;
+}
+
+/* The actual input inside the group needs borders removed to look seamless */
+.pf-v5-c-input-group .pf-v5-c-form-control,
+.pf-c-input-group .pf-c-form-control,
+.pf-v5-c-input-group input,
+.pf-c-input-group input {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 10px 0 0 10px !important; /* Only round left side */
+  height: 100% !important;
+  flex: 1 !important;
+  margin: 0 !important;
+}
+
+/* The eye button */
+.pf-v5-c-input-group .pf-v5-c-button.pf-m-control,
+.pf-c-input-group .pf-c-button.pf-m-control,
+.pf-v5-c-input-group button,
+.pf-c-input-group button {
+  border: none !important;
+  background: transparent !important;
+  color: #64748b !important;
+  padding: 0 16px !important;
+  border-radius: 0 10px 10px 0 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+.pf-v5-c-input-group button:hover,
+.pf-c-input-group button:hover {
+  color: #0f172a !important;
+  background: #f8fafc !important;
+}
+
+.pf-v5-c-input-group button:focus-visible,
+.pf-c-input-group button:focus-visible {
+  outline: 2px solid #2563eb !important;
+  outline-offset: -2px !important;
+}
+
+/* --- 6. Primary Button --- */
+.pf-v5-c-button.pf-m-primary,
+.pf-c-button.pf-m-primary,
+#kc-login {
+  background: #0f3b73 !important;
+  border: 1px solid #0f3b73 !important;
+  border-radius: 10px !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  height: 48px !important;
+  width: 100% !important;
+  font-family: inherit !important;
+  margin-top: 10px !important;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease !important;
+  box-shadow: 0 10px 20px rgba(15, 59, 115, 0.16) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.pf-v5-c-button.pf-m-primary:hover,
+.pf-c-button.pf-m-primary:hover,
+#kc-login:hover {
+  background: #0b315f !important;
+}
+
+.pf-v5-c-button.pf-m-primary:focus-visible,
+.pf-c-button.pf-m-primary:focus-visible,
+#kc-login:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.24) !important;
+  outline-offset: 2px !important;
+}
+
+.pf-v5-c-button.pf-m-primary:active,
+.pf-c-button.pf-m-primary:active,
+#kc-login:active {
+  transform: translateY(1px) !important;
+}
+
+/* --- 7. Links & Options --- */
+a {
+  color: #1d4ed8 !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  transition: color 0.2s ease !important;
+}
+
+a:hover {
+  color: #1e3a8a !important;
+  text-decoration: underline !important;
+}
+
+#kc-form-options,
+.pf-v5-c-login__main-footer-links,
+.pf-c-login__main-footer-links {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  font-size: 0.875rem !important;
+  margin-top: 8px !important;
+}
+
+#kc-form-options span,
+.pf-v5-c-check__label,
+.pf-c-check__label {
+  color: #475569 !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  cursor: pointer !important;
+}
+
+.pf-v5-c-check,
+.pf-c-check {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.pf-v5-c-check__input,
+.pf-c-check__input,
+input[type="checkbox"] {
+  accent-color: #0f3b73 !important;
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 4px !important;
+  border: 1px solid #cbd5e1 !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+}
+
+/* --- 8. Alerts & Errors --- */
+.pf-v5-c-alert,
+.pf-c-alert,
+#kc-error-message {
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  border: 1px solid transparent !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  margin-bottom: 24px !important;
+}
+
+.pf-v5-c-alert.pf-m-danger,
+.pf-c-alert.pf-m-danger,
+.pf-v5-c-alert.pf-m-warning,
+.pf-c-alert.pf-m-warning,
+.alert-error {
+  background: #fff7ed !important;
+  border-color: #fed7aa !important;
+  color: #9a3412 !important;
+}
+
+.pf-v5-c-alert.pf-m-success,
+.pf-c-alert.pf-m-success {
+  background: #dcfce7 !important;
+  border-color: #bbf7d0 !important;
+  color: #166534 !important;
+}
+
+.pf-v5-c-alert__icon,
+.pf-c-alert__icon {
+  font-size: 1.1rem !important;
+  line-height: 1 !important;
+  margin-top: 2px !important;
+}
+
+.pf-v5-c-alert__title,
+.pf-c-alert__title {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* --- 9. Responsive --- */
+@media (max-width: 600px) {
+  .login-pf-page,
+  .pf-v5-c-login,
+  .pf-c-login {
+    padding: 16px !important;
+  }
+  .login-pf-page .card-pf,
+  .pf-v5-c-login__main,
+  .pf-c-login__main,
+  #kc-content {
+    padding: 32px 20px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05) !important;
+  }
+}

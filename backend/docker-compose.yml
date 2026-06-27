@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: saas-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-saas_postgres}
+      POSTGRES_USER: ${POSTGRES_USER:-saas_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-saas_password}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

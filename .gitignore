@@ -1,0 +1,30 @@
+﻿# Java / Spring Boot
+backend/target/
+*.class
+*.jar
+*.war
+
+# Node / Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/cache/
+frontend/.cache/
+
+# Environment / secrets
+.env
+*.env
+.env.*
+!.env.example
+application-local.yaml
+application-local.yml
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
