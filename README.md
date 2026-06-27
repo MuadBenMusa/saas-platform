@@ -53,8 +53,17 @@ Es ist ein persönliches Showcase-Projekt und bewusst als kompakter modularer Mo
 
 ## Screenshots
 
-Screenshots werden ergänzt.
+### Landing Page
+![Landing Page](docs/screenshots/landing.png)
 
+### Login
+![Login](docs/screenshots/login.png)
+
+### Projekte
+![Projekte](docs/screenshots/projects.png)
+
+### Projekt anlegen
+![Projekt anlegen](docs/screenshots/create-project.png)
 ## Lokal starten
 
 Voraussetzungen:
