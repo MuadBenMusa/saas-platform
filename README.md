@@ -64,6 +64,13 @@ Es ist ein persönliches Showcase-Projekt und bewusst als kompakter modularer Mo
 
 ### Projekt anlegen
 ![Projekt anlegen](docs/screenshots/create-project.png)
+
+## Provisioning / Demo-Daten
+
+Das öffentliche Showcase-Repository enthält bewusst keinen automatischen Dev-Seeder und keine festen Demo-Identitäten.
+Für eine lokale Demo muss ein Keycloak-Benutzer aktuell manuell mit einem `AppUser`, einem `Tenant` und einer `TenantMembership` in der App-Datenbank verknüpft werden.
+
+Ein produktionsnaher Onboarding-Flow, zum Beispiel über JIT-Provisioning oder Einladungen pro Tenant, ist ein geplanter späterer Schritt.
 ## Lokal starten
 
 Voraussetzungen:
