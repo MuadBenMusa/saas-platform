@@ -1,0 +1,17 @@
+target
+.idea
+.vscode
+*.iml
+
+.env
+*.env
+.env.*
+
+logs
+*.log
+
+node_modules
+dist
+.angular
+
+README.md
