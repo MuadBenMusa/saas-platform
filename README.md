@@ -132,6 +132,16 @@ npm.cmd run build
 npm.cmd test -- --watch=false
 ```
 
+## Deployment / DigitalOcean
+
+Die aktuelle Showcase-Deployment-Struktur nutzt Keycloak als separate DigitalOcean App Platform Container-App. Backend und Angular-Frontend laufen zusammen unter einer App-Platform-App und Domain.
+
+Deployment-Details, notwendige Umgebungsvariablen, Frontend-Build-Pfade und die erforderlichen `preserve_path_prefix: true` Routen sind hier dokumentiert:
+
+[DigitalOcean deployment notes](docs/deployment-digitalocean.md)
+
+Ein produktionsnahes Deployment erfordert aktuell weiterhin manuelles Keycloak-Realm-/Client-Setup sowie manuelles Provisioning der Demo-Benutzer, Tenants und TenantMemberships. Das Projekt erhebt bewusst keinen Anspruch auf vollautomatisches Production-Onboarding.
+
 ## Status
 
 Das Projekt ist ein Prototyp und Work in Progress. Der aktuelle Stand deckt Authentifizierung, Tenant-Kontext, Projekte und grundlegende UI-Flows ab.

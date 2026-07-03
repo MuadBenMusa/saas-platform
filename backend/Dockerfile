@@ -19,6 +19,10 @@ WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
 
+RUN groupadd --system app && useradd --system --gid app --home-dir /app --shell /usr/sbin/nologin app
+
+USER app
+
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "app.jar"]

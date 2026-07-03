@@ -17,7 +17,7 @@ If Keycloak is later added to the `backend/docker-compose.yml`, mount this direc
 ```yaml
 services:
   keycloak:
-    image: quay.io/keycloak/keycloak:latest
+    image: quay.io/keycloak/keycloak:26.6.4
     ...
     volumes:
       - ../keycloak/themes/saas-platform:/opt/keycloak/themes/saas-platform
@@ -28,6 +28,12 @@ Copy the `saas-platform` directory into your Keycloak installation's `themes/` d
 ```bash
 cp -r keycloak/themes/saas-platform /path/to/keycloak/themes/
 ```
+
+## DigitalOcean deployment note
+
+The current `keycloak/Dockerfile` builds an optimized Keycloak image and does not copy this custom theme into the image. The `keycloak/.dockerignore` file also excludes `themes`, so the DigitalOcean deployment currently uses the default Keycloak login theme unless the theme is mounted or the image is intentionally changed to package it.
+
+That is deliberate for the public showcase polish pass: the deployed authentication architecture stays unchanged, and no theme packaging is forced into the working Keycloak deployment.
 
 ## Activation Steps
 Once the theme files are accessible to Keycloak:
