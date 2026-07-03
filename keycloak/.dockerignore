@@ -1,0 +1,15 @@
+.env
+*.env
+.env.*
+
+README.md
+themes
+target
+node_modules
+dist
+.angular
+.idea
+.vscode
+*.iml
+logs
+*.log
