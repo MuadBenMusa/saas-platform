@@ -1,14 +1,25 @@
 <header class="topbar">
-  <div>
+  <div class="brand-row">
+    <button
+      type="button"
+      class="menu-button"
+      [attr.aria-label]="mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'"
+      [attr.aria-expanded]="mobileMenuOpen"
+      aria-controls="primary-sidebar"
+      (click)="toggleMobileMenu.emit()"
+    >
+      <span aria-hidden="true">{{ mobileMenuOpen ? '×' : '☰' }}</span>
+    </button>
     <strong>SaaS Platform</strong>
   </div>
 
   <div class="right">
     @if (session) {
-      <span>{{ session.user.name }}</span>
+      <span class="user-name">{{ session.user.name }}</span>
       <span class="tenant">{{ session.activeTenant.name }}</span>
       <button
         type="button"
+        class="logout-button"
         [disabled]="sessionService.loggingOut()"
         (click)="sessionService.logout()"
       >

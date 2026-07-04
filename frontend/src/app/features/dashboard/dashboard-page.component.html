@@ -1,20 +1,64 @@
-<h1>Dashboard</h1>
+<section class="dashboard">
+  <app-page-header
+    title="Dashboard"
+    eyebrow="Workspace overview"
+    [subtitle]="sessionService.session()
+      ? 'Welcome back, ' + sessionService.session()?.user?.name + '. This workspace is scoped to your active tenant.'
+      : 'Your tenant-scoped SaaS workspace.'"
+  />
 
-@if (sessionService.session(); as session) {
-  <p>Welcome, {{ session.user.name }}.</p>
+  <section class="kpi-grid" aria-label="Workspace KPIs">
+    <app-card title="Projects" subtitle="Tenant-owned work" [loading]="projectCountLoading()">
+      <div class="kpi-value">
+        @if (projectCountError()) {
+          Unavailable
+        } @else {
+          {{ projectCount() ?? 0 }}
+        }
+      </div>
+      <div card-footer>
+        <app-status-badge status="ACTIVE" [label]="projectCountError() ? 'Check later' : 'Live data'" />
+      </div>
+    </app-card>
 
-  <dl>
-    <div>
-      <dt>Email</dt>
-      <dd>{{ session.user.email }}</dd>
-    </div>
-    <div>
-      <dt>Active tenant</dt>
-      <dd>{{ session.activeTenant.name }}</dd>
-    </div>
-    <div>
-      <dt>Role</dt>
-      <dd>{{ session.activeTenant.role }}</dd>
-    </div>
-  </dl>
-}
+    <app-card title="Materials" subtitle="Inventory master data">
+      <div class="kpi-value kpi-value--planned">Planned</div>
+      <div card-footer>
+        <app-status-badge status="DRAFT" label="Coming soon" />
+      </div>
+    </app-card>
+
+    <app-card title="Low Stock" subtitle="Operational alerts">
+      <div class="kpi-value kpi-value--planned">Planned</div>
+      <div card-footer>
+        <app-status-badge status="LOW_STOCK" label="Coming soon" />
+      </div>
+    </app-card>
+
+    <app-card title="Open Orders" subtitle="Procurement flow">
+      <div class="kpi-value kpi-value--planned">Planned</div>
+      <div card-footer>
+        <app-status-badge status="ORDERED" label="Coming soon" />
+      </div>
+    </app-card>
+  </section>
+
+  @if (sessionService.session(); as session) {
+    <app-card title="Current SaaS context" subtitle="Resolved server-side from your Spring session and tenant membership.">
+      <dl class="context-grid" aria-label="Current SaaS context">
+        <div>
+          <dt>Email</dt>
+          <dd>{{ session.user.email }}</dd>
+        </div>
+        <div>
+          <dt>Active tenant</dt>
+          <dd>{{ session.activeTenant.name }}</dd>
+        </div>
+        <div>
+          <dt>Role</dt>
+          <dd>{{ session.activeTenant.role }}</dd>
+        </div>
+      </dl>
+    </app-card>
+  }
+</section>

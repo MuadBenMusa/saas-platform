@@ -4,6 +4,8 @@ ENV KC_DB=postgres
 ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 
+COPY themes/saas-platform /opt/keycloak/themes/saas-platform
+
 RUN /opt/keycloak/bin/kc.sh build
 
 

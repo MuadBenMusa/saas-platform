@@ -1,0 +1,27 @@
+<section class="card" [class.card--compact]="compact" [attr.aria-busy]="loading">
+  @if (loading) {
+    <div class="skeleton skeleton-title" aria-hidden="true"></div>
+    <div class="skeleton skeleton-line" aria-hidden="true"></div>
+    <span class="sr-only">Loading</span>
+  } @else {
+    @if (title || subtitle) {
+      <header class="card-header">
+        <ng-content select="[card-icon]" />
+        <div>
+          @if (title) {
+            <h2>{{ title }}</h2>
+          }
+          @if (subtitle) {
+            <p>{{ subtitle }}</p>
+          }
+        </div>
+      </header>
+    }
+
+    <div class="card-content">
+      <ng-content />
+    </div>
+
+    <ng-content select="[card-footer]" />
+  }
+</section>

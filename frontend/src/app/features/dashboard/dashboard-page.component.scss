@@ -1,0 +1,68 @@
+.dashboard {
+  display: grid;
+  gap: 18px;
+}
+
+.kpi-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.kpi-value {
+  color: #0f172a;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.kpi-value--planned {
+  color: #64748b;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.context-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+}
+
+.context-grid div {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  min-width: 0;
+  padding: 16px;
+}
+
+dt {
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+dd {
+  color: #0f172a;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 8px 0 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1199px) {
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .kpi-grid,
+  .context-grid {
+    grid-template-columns: 1fr;
+  }
+}

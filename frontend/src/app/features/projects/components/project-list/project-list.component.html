@@ -1,4 +1,4 @@
-<div class="table-card">
+<div class="table-card desktop-project-list">
   <table aria-label="Projects">
     <colgroup>
       <col class="number-column" />
@@ -33,13 +33,7 @@
             }
           </td>
           <td class="status-cell">
-            <span
-              class="status-badge"
-              [class.status-badge--active]="project.status === 'ACTIVE'"
-              [class.status-badge--archived]="project.status === 'ARCHIVED'"
-            >
-              {{ project.status }}
-            </span>
+            <app-status-badge [status]="project.status" />
           </td>
           <td class="created-cell">{{ project.createdAt | date: 'short' }}</td>
           <td class="actions-cell" (click)="$event.stopPropagation()">
@@ -79,4 +73,68 @@
       }
     </tbody>
   </table>
+</div>
+
+<div class="mobile-project-list" aria-label="Projects">
+  @for (project of projects; track project.id) {
+    <article class="project-card" [class.is-archived]="project.status === 'ARCHIVED'">
+      <div class="card-topline">
+        <span class="project-number">{{ project.projectNumber }}</span>
+        <app-status-badge [status]="project.status" />
+      </div>
+
+      <div class="card-main">
+        <div>
+          <h2 class="card-title">{{ project.name }}</h2>
+          @if (project.description) {
+            <p class="description">{{ project.description }}</p>
+          }
+        </div>
+
+        <div class="row-actions card-actions" (click)="$event.stopPropagation()">
+          <button
+            type="button"
+            class="actions-trigger actions-trigger--mobile"
+            [attr.aria-label]="'Open actions for ' + project.projectNumber"
+            aria-haspopup="menu"
+            [attr.aria-expanded]="openActionsProjectId() === project.id"
+            (click)="toggleActionsMenu(project, $event)"
+          >
+            <span class="actions-label">Actions</span>
+            <span aria-hidden="true">&#8942;</span>
+          </button>
+
+          @if (openActionsProjectId() === project.id) {
+            <div class="actions-menu" role="menu">
+              @if (project.status !== 'ARCHIVED') {
+                <button
+                  type="button"
+                  class="menu-item menu-item--danger"
+                  role="menuitem"
+                  (click)="archiveFromMenu(project, $event)"
+                >
+                  Archive
+                </button>
+              } @else {
+                <button type="button" class="menu-item" role="menuitem" disabled>
+                  Archived
+                </button>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <dl class="card-meta">
+        <div>
+          <dt>Created</dt>
+          <dd>{{ project.createdAt | date: 'mediumDate' }}</dd>
+        </div>
+        <div>
+          <dt>Updated</dt>
+          <dd>{{ project.updatedAt | date: 'mediumDate' }}</dd>
+        </div>
+      </dl>
+    </article>
+  }
 </div>

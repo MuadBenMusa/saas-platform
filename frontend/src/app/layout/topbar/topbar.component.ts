@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SessionService } from '../../core/auth/session.service';
 import { CurrentSession } from '../../core/auth/session.model';
 
@@ -10,6 +10,9 @@ import { CurrentSession } from '../../core/auth/session.model';
 })
 export class TopbarComponent {
   @Input() session: CurrentSession | null = null;
+  @Input() mobileMenuOpen = false;
+
+  @Output() toggleMobileMenu = new EventEmitter<void>();
 
   constructor(public readonly sessionService: SessionService) {}
 }

@@ -16,6 +16,7 @@ textarea {
   border: 1px solid #cbd5e1;
   border-radius: 10px;
   color: #0f172a;
+  min-height: 44px;
   outline: none;
   padding: 10px 12px;
   transition: border-color 0.16s ease, box-shadow 0.16s ease;
@@ -29,6 +30,7 @@ textarea:focus {
 }
 
 textarea {
+  min-height: 116px;
   resize: vertical;
 }
 
@@ -57,7 +59,7 @@ textarea {
 .secondary-action {
   border-radius: 10px;
   font-weight: 700;
-  min-height: 40px;
+  min-height: 44px;
   padding: 0 14px;
 }
 
@@ -82,8 +84,17 @@ textarea {
 }
 
 @media (max-width: 560px) {
+  .form {
+    gap: 14px;
+  }
+
   .actions {
+    background: linear-gradient(to top, #ffffff 72%, rgba(255, 255, 255, 0));
     flex-direction: column-reverse;
+    margin: 2px -2px -4px;
+    padding-top: 12px;
+    position: sticky;
+    bottom: -20px;
   }
 
   .actions button {

@@ -40,16 +40,29 @@ Es ist ein persönliches Showcase-Projekt und bewusst als kompakter modularer Mo
 - Sicherheitsentscheidungen werden bewusst explizit gehalten
 - Kommentare werden sparsam genutzt und erklären vor allem Architektur- oder Sicherheitsentscheidungen
 
+## UI / Responsive Design
+
+Das Frontend ist bewusst mobile-first und desktop-enhanced gestaltet.
+
+- Desktop: persistente Sidebar, Tabellen, kompakte Übersichten und administrative Workflows
+- Mobile: Drawer-Navigation, Karten statt Tabellen, größere Touch-Ziele und einfache Aktionsflächen
+- Projekte werden auf Desktop als Tabelle und auf kleinen Bildschirmen als Karten dargestellt
+- Dialoge und Formulare sind für kleinere Bildschirme angepasst
+- Wiederverwendbare UI-Komponenten sorgen für ein einheitliches Layout über Dashboard und Fachmodule hinweg
+
+Dieses Muster ist die Grundlage für die nächsten Module wie Materials / Inventory Master Data.
+
 ## Aktueller Funktionsumfang
 
-- Login über Keycloak
+- Login über Keycloak / OpenID Connect
 - session-basierte Angular-Anbindung über Cookies
-- Benutzer- und Tenant-Kontext
-- Projekte anlegen, anzeigen und archivieren
+- serverseitiger Benutzer- und Tenant-Kontext
+- Projekte anlegen, anzeigen, suchen, filtern und archivieren
 - Tenant-Isolation im Backend
 - Flyway-Datenbankschema
-- Backend-Tests inklusive PostgreSQL-Testcontainers
-- erste moderne Angular-Oberfläche mit Projekttabelle, Dialogen und Sidebar
+- Backend-Tests inklusive PostgreSQL/Testcontainers
+- responsive Angular-Oberfläche mit Desktop-Tabellen und mobilen Karten
+- wiederverwendbare UI-Bausteine wie Page Header, Cards, Status Badges, Empty States und Search Toolbar
 
 ## Screenshots
 
@@ -144,10 +157,9 @@ Ein produktionsnahes Deployment erfordert aktuell weiterhin manuelles Keycloak-R
 
 ## Status
 
-Das Projekt ist ein Prototyp und Work in Progress. Der aktuelle Stand deckt Authentifizierung, Tenant-Kontext, Projekte und grundlegende UI-Flows ab.
+Das Projekt ist ein Prototyp und Work in Progress. Der aktuelle Stand deckt Authentifizierung, Tenant-Kontext, Projekte, responsive UI-Grundlagen und grundlegende SaaS-Layout-Patterns ab.
 
-Geplanter nächster Schritt: Materials / Inventory Master Data.
-
+Geplanter nächster fachlicher Schritt: Materials / Inventory Master Data.
 ## Hinweis
 
 Dieses Repository enthält keine Produktivdaten und ist ein persönliches Showcase-Projekt. Lokale Secrets wie Keycloak-Client-Secrets gehören nicht ins Repository.

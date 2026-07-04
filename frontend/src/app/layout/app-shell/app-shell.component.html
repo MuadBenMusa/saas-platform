@@ -1,7 +1,24 @@
-<app-topbar [session]="sessionService.session()" />
+<app-topbar
+  [session]="sessionService.session()"
+  [mobileMenuOpen]="mobileNavOpen()"
+  (toggleMobileMenu)="toggleMobileNav()"
+/>
 
 <div class="shell">
-  <app-sidebar />
+  <button
+    type="button"
+    class="mobile-backdrop"
+    [class.is-visible]="mobileNavOpen()"
+    aria-label="Close navigation"
+    [attr.aria-hidden]="!mobileNavOpen()"
+    [attr.tabindex]="mobileNavOpen() ? 0 : -1"
+    (click)="closeMobileNav()"
+  ></button>
+
+  <app-sidebar
+    [mobileOpen]="mobileNavOpen()"
+    (navigate)="closeMobileNav()"
+  />
   <main class="content">
     <router-outlet />
   </main>

@@ -1,0 +1,30 @@
+<header class="page-header">
+  <div class="copy">
+    @if (eyebrow) {
+      <p class="eyebrow">{{ eyebrow }}</p>
+    }
+
+    <h1>{{ title }}</h1>
+
+    @if (subtitle) {
+      <p class="subtitle">{{ subtitle }}</p>
+    }
+  </div>
+
+  <div class="actions">
+    <ng-content select="[page-header-secondary]" />
+
+    @if (primaryActionLabel) {
+      <button
+        type="button"
+        class="primary-action"
+        (click)="primaryAction.emit()"
+      >
+        @if (primaryActionIcon) {
+          <span aria-hidden="true">{{ primaryActionIcon }}</span>
+        }
+        {{ primaryActionLabel }}
+      </button>
+    }
+  </div>
+</header>

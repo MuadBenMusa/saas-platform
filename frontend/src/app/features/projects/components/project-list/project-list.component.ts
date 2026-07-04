@@ -1,11 +1,12 @@
 import { Component, EventEmitter, HostListener, Input, Output, signal } from '@angular/core';
 import { Project } from '../../models/project.model';
 import { DatePipe } from '@angular/common';
+import { StatusBadgeComponent } from '../../../../shared/ui/status-badge/status-badge.component';
 
 @Component({
   selector: 'app-project-list',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, StatusBadgeComponent],
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.scss'
 })

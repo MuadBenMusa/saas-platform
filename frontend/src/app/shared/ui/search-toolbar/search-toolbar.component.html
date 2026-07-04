@@ -1,0 +1,39 @@
+<section class="toolbar" aria-label="Project search and filters">
+  <label class="search-field">
+    <span class="sr-only">{{ placeholder }}</span>
+    <input
+      type="search"
+      [value]="searchValue"
+      [placeholder]="placeholder"
+      (input)="searchValueChange.emit($any($event.target).value)"
+    />
+  </label>
+
+  <div class="filter-row" role="group" aria-label="Status filter">
+    @for (filter of filters; track filter) {
+      <button
+        type="button"
+        class="filter-chip"
+        [class.is-active]="statusFilter === filter"
+        [attr.aria-pressed]="statusFilter === filter"
+        (click)="statusFilterChange.emit(filter)"
+      >
+        {{ filterLabel(filter) }}
+      </button>
+    }
+  </div>
+
+  <div class="toolbar-meta">
+    @if (resultLabel) {
+      <span>{{ resultLabel }}</span>
+    }
+    <button
+      type="button"
+      class="clear-button"
+      [disabled]="!canClear"
+      (click)="clearFilters.emit()"
+    >
+      Clear
+    </button>
+  </div>
+</section>

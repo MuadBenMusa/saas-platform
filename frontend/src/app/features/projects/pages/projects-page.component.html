@@ -1,42 +1,55 @@
 <section class="page">
-  <div class="header">
-    <div>
-      <p class="eyebrow">Tenant workspace</p>
-      <h1>Projects</h1>
-      <p>Create and manage tenant-owned projects.</p>
-    </div>
-
-    <button type="button" class="primary-action" (click)="openCreateDialog()">
-      Create project
-    </button>
-  </div>
+  <app-page-header
+    title="Projects"
+    eyebrow="Tenant workspace"
+    subtitle="Create and manage tenant-owned projects."
+    primaryActionLabel="Create project"
+    primaryActionIcon="+"
+    (primaryAction)="openCreateDialog()"
+  />
 
   @if (error() && !isCreateDialogOpen() && !projectPendingArchive()) {
     <div class="alert" role="alert">{{ error() }}</div>
   }
 
   @if (loading()) {
-    <div class="state-card loading-card" role="status" aria-live="polite">
-      <span class="spinner" aria-hidden="true"></span>
-      <div>
-        <h2>Loading projects</h2>
-        <p>Fetching tenant-owned work for your active workspace.</p>
-      </div>
+    <div role="status" aria-live="polite">
+      <app-card title="Loading projects" subtitle="Fetching tenant-owned work." [loading]="true" />
     </div>
   } @else if (projects().length === 0) {
-    <div class="state-card empty-card">
-      <div class="empty-icon" aria-hidden="true">+</div>
-      <h2>No projects yet</h2>
-      <p>Create your first project to start organizing tenant-owned work.</p>
-      <button type="button" class="primary-action" (click)="openCreateDialog()">
-        Create a project
-      </button>
-    </div>
-  } @else {
-    <app-project-list
-      [projects]="projects()"
-      (archiveProject)="openArchiveDialog($event)"
+    <app-empty-state
+      title="No projects yet"
+      message="Create your first project to start organizing tenant-scoped work."
+      icon="+"
+      primaryActionLabel="Create project"
+      (primaryAction)="openCreateDialog()"
     />
+  } @else {
+    <app-search-toolbar
+      [searchValue]="searchTerm()"
+      [statusFilter]="statusFilter()"
+      [canClear]="hasActiveFilters()"
+      [resultLabel]="resultLabel()"
+      placeholder="Search number, name, or status"
+      (searchValueChange)="updateSearchTerm($event)"
+      (statusFilterChange)="updateStatusFilter($event)"
+      (clearFilters)="clearFilters()"
+    />
+
+    @if (filteredProjects().length === 0) {
+      <app-empty-state
+        title="No projects found"
+        message="Try a different search or clear the current status filter."
+        icon="⌕"
+        [primaryActionLabel]="hasActiveFilters() ? 'Clear filters' : ''"
+        (primaryAction)="clearFilters()"
+      />
+    } @else {
+      <app-project-list
+        [projects]="filteredProjects()"
+        (archiveProject)="openArchiveDialog($event)"
+      />
+    }
   }
 
   @if (isCreateDialogOpen()) {
